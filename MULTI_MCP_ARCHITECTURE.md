@@ -44,9 +44,9 @@ interface IHistoricalReferenceProvider {
 
 🔷 **Stub implementado, listo para completar**
 
-- Extensible para fedpat-jira MCP
+- Extensible para Jira MCP (experimental)
 - Constructor acepta: `{connectionId, project, maxResults}`
-- TODO: Implementar con herramientas de fedpat-jira:
+- TODO: Implementar con herramientas de Jira MCP:
   - `jira_search` - búsqueda por JQL
   - `jira_get_issue` con `detail_level=full` - para extraer timetracking
   - `jira_get_parent_issue` - para relaciones
@@ -129,7 +129,7 @@ interface HistoricalRecordExtended extends HistoricalRecord {
 ```typescript
 historicalDataSource: {
   default: 'local-file',
-  enabled: ['local-file'], // Agregar 'fedpat-jira-prod' cuando disponible
+  enabled: ['local-file'], // Agregar 'jira' cuando disponible
 }
 
 referenceSelection: {
@@ -201,7 +201,7 @@ npm run estimate -- ./brief.md --data-source hybrid --jira-project PROJ
 **Flags disponibles**:
 - `--data-source` - Fuente: `file` | `jira` | `csv` | `hybrid` (default: `file`)
 - `--references` - Modo: `manual` | `automatic` (default: `manual`)
-- `--jira-project` - Proyecto Jira (requiere fedpat-jira MCP)
+- `--jira-project` - Proyecto Jira (requiere Jira MCP disponible)
 
 **Comportamiento CLI**:
 - Parsea argumentos y crea `ReferenceSelection`
@@ -293,7 +293,7 @@ export class AzureAdapter extends BaseHistoricalReferenceProvider {
 
 ## Próximos Pasos Sugeridos
 
-1. **Completar JiraAdapter** - Integrar herramientas fedpat-jira MCP
+1. **Completar JiraAdapter** - Integrar herramientas Jira MCP
 2. **Crear referenceSelector agent** - Para modo `automatic`
 3. **Agregar CSV/Excel adapters** - Ampliar compatibilidad
 4. **Tests** - Coverage para adapter layer, multi-source queries

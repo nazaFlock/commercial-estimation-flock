@@ -228,12 +228,12 @@ const projection = projectionService.projectProposal(technical, records);
 ## 🎯 Independencia de Fuentes
 
 El motor **NO conoce de:**
-- ❌ Fedpat, FedPat, fedpat-jira
+- ❌ Proveedores específicos (Jira, Azure, etc.)
 - ❌ Claves de proyectos Jira (MAART, etc.)
 - ❌ Claves de issues (ABC-123)
 - ❌ Estructura de épicas
-- ❌ Campos Jira específicos
-- ❌ Excel vs CSV vs JSON
+- ❌ Campos específicos de cada fuente
+- ❌ Formatos de datos (Excel, CSV, JSON)
 
 El motor **SOLO utiliza:**
 - ✅ `actualHours` (normalizado)

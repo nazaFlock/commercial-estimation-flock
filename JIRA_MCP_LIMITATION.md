@@ -1,4 +1,4 @@
-# Limitación Actual: Invocación de fedpat-jira MCP
+# Limitación Actual: Invocación de Jira MCP
 
 ## Problema
 
@@ -14,16 +14,16 @@ El JiraAdapter intenta invocar la herramienta `jira_search` desde el Claude Agen
 
 Existen varias posibilidades:
 
-1. **MCP no registrado en sesión EstimadorFlock**
-   - fedpat-jira MCP está disponible en reingenieria/
-   - Pero no se transportó a EstimadorFlock/
+1. **MCP no registrado en sesión del EstimadorFlock**
+   - Jira MCP podría estar disponible pero no transportado a la sesión
+   - Requiere verificar disponibilidad en el contexto local
 
 2. **Agent SDK limitación**
    - El método `query()` del Agent SDK podría no invocar herramientas automáticamente
    - Requeriría un enfoque diferente (tool_choice forzada, etc.)
 
 3. **Contexto de sesión diferente**
-   - Aunque reportaste que puedes conectarte desde CLI
+   - Aunque se puede conectar desde CLI
    - El contexto de la sesión TypeScript podría ser diferente
 
 ## Solución Implementada (Graceful Fallback)
@@ -40,7 +40,7 @@ try {
   const searchResponse = await agentClient.jiraSearch(jql, maxResults);
   // Procesar resultado
 } catch (agentError) {
-  logger.warn('No se pudo acceder a fedpat-jira MCP. Fallback: usando JSON local.');
+  logger.warn('No se pudo acceder a Jira MCP. Fallback: usando JSON local.');
   return [];  // Workflow continúa sin error
 }
 ```
@@ -51,7 +51,7 @@ try {
 ```bash
 # En la sesión del estimador, probar:
 # 1. Ver MCPs disponibles
-# 2. Verificar si fedpat-jira está registrado
+# 2. Verificar si Jira MCP está registrado
 # 3. Si no está, configurarlo
 ```
 
@@ -84,7 +84,7 @@ npm run estimate -- ./examples/brief-ecommerce.md
 
 ## Recomendación
 
-**Por ahora:** El sistema funciona perfectamente con JSON local. La arquitectura multi-MCP está lista y lista para cualquier fuente que normalice datos a `HistoricalRecordExtended`.
+**Por ahora:** El sistema funciona perfectamente con JSON local. La arquitectura multi-MCP está lista para cualquier fuente que normalice datos a `HistoricalRecordExtended`.
 
 **Para Jira en futuro:** 
 1. Investiga cómo invocar herramientas correctamente en Agent SDK
@@ -95,4 +95,4 @@ npm run estimate -- ./examples/brief-ecommerce.md
 
 ---
 
-**Nota:** Si logras hacer funcionar fedpat-jira desde la sesión EstimadorFlock, actualiza agentClient.ts con el approach correcto y JiraAdapter funcionará automáticamente.
+**Nota:** Si logras hacer funcionar Jira MCP desde la sesión del EstimadorFlock, actualiza agentClient.ts con el approach correcto y JiraAdapter funcionará automáticamente.
