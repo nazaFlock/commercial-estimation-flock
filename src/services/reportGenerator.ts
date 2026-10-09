@@ -143,6 +143,14 @@ function generateMarkdown(report: EstimationReport): string {
   // Estadísticas de referencias (si disponibles)
   const statisticsSection = generateStatisticsSection(report);
 
+  // Generate effort distribution charts
+  const backendHours = report.estimation.profileEffort.find(p => p.profile === 'backend')?.likelyHours || 0;
+  const frontendHours = report.estimation.profileEffort.find(p => p.profile === 'frontend')?.likelyHours || 0;
+  const qaHours = report.estimation.profileEffort.find(p => p.profile === 'qa')?.likelyHours || 0;
+  const devopsHours = report.estimation.profileEffort.find(p => p.profile === 'devops')?.likelyHours || 0;
+  const otherHours = report.estimation.profileEffort.find(p => p.profile === 'architect')?.likelyHours || 0;
+  const totalHours = report.estimation.scenariosHours.likelyHours;
+
   let markdown = `# Estimation Report
 
 **Project:** ${sanitizeMarkdown(report.briefId)}
