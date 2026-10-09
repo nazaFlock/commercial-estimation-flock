@@ -151,17 +151,17 @@ function generateMarkdown(report: EstimationReport): string {
   const otherHours = report.estimation.profileEffort.find(p => p.profile === 'architect')?.likelyHours || 0;
   const totalHours = report.estimation.scenariosHours.likelyHours;
 
-  let markdown = `# Estimation Report
+  let markdown = `# Reporte de Estimación
 
-**Project:** ${sanitizeMarkdown(report.briefId)}
-**Generated:** ${new Date(report.generatedAt).toLocaleString()}
-**Confidence Level:** ${report.confidenceLevel.toUpperCase()} (${extractConfidencePercentage(report.confidenceJustification)}%)
+**Proyecto:** ${sanitizeMarkdown(report.briefId)}
+**Generado:** ${new Date(report.generatedAt).toLocaleString()}
+**Nivel de Confianza:** ${report.confidenceLevel.toUpperCase()} (${extractConfidencePercentage(report.confidenceJustification)}%)
 
-## Executive Summary
+## Resumen Ejecutivo
 
 ${sanitizeMarkdown(report.executiveSummary)}
 
-### Confidence Justification
+### Justificación de Confianza
 ${sanitizeMarkdown(report.confidenceJustification)}
 
 ## Descripción General del Esfuerzo
@@ -199,9 +199,9 @@ ${report.functionalAnalysis.modules
   .map(
     (m) => `
 #### ${sanitizeMarkdown(m.name)}
-- **Description:** ${sanitizeMarkdown(m.description)}
-- **Priority:** ${sanitizeMarkdown(m.priority || 'Not specified')}
-- **Functionalities:** ${m.functionalities.length}
+- **Descripción:** ${sanitizeMarkdown(m.description)}
+- **Prioridad:** ${sanitizeMarkdown(m.priority || 'No especificada')}
+- **Funcionalidades:** ${m.functionalities.length}
   ${m.functionalities.map((f) => `- ${sanitizeMarkdown(f.name)}: ${sanitizeMarkdown(f.description)}`).join('\n  ')}
 `,
   )
