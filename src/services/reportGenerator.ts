@@ -301,6 +301,24 @@ ${report.exclusions.map((e) => `- ${sanitizeMarkdown(e)}`).join('\n')}
 
 ${report.pendingValidation.length > 0 ? report.pendingValidation.map((p) => `- ${sanitizeMarkdown(p)}`).join('\n') : 'None identified'}
 
+## Effort Distribution Charts
+
+### By Profile
+\`\`\`mermaid
+graph LR
+    A["Backend<br/>${report.estimation.profileEffort.find(p => p.profile === 'backend')?.likelyHours || 0}h"] -->|"${((report.estimation.profileEffort.find(p => p.profile === 'backend')?.likelyHours || 0) / report.estimation.scenariosHours.likelyHours * 100).toFixed(0)}%"| Total["Total<br/>${report.estimation.scenariosHours.likelyHours}h"]
+    B["Frontend<br/>${report.estimation.profileEffort.find(p => p.profile === 'frontend')?.likelyHours || 0}h"] -->|"${((report.estimation.profileEffort.find(p => p.profile === 'frontend')?.likelyHours || 0) / report.estimation.scenariosHours.likelyHours * 100).toFixed(0)}%"| Total
+    C["QA<br/>${report.estimation.profileEffort.find(p => p.profile === 'qa')?.likelyHours || 0}h"] -->|"${((report.estimation.profileEffort.find(p => p.profile === 'qa')?.likelyHours || 0) / report.estimation.scenariosHours.likelyHours * 100).toFixed(0)}%"| Total
+    D["DevOps<br/>${report.estimation.profileEffort.find(p => p.profile === 'devops')?.likelyHours || 0}h"] -->|"${((report.estimation.profileEffort.find(p => p.profile === 'devops')?.likelyHours || 0) / report.estimation.scenariosHours.likelyHours * 100).toFixed(0)}%"| Total
+\`\`\`
+
+### Scenario Range (Min - Likely - Max)
+\`\`\`mermaid
+graph LR
+    A["Min<br/>${report.estimation.scenariosHours.minHours}h"] -->|"likelihood"| B["Likely<br/>${report.estimation.scenariosHours.likelyHours}h"]
+    B -->|"likelihood"| C["Max<br/>${report.estimation.scenariosHours.maxHours}h"]
+\`\`\`
+
 ---
 
 *This estimation is preliminary and should be validated with stakeholders before final commitment.*

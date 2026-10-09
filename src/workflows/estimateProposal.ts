@@ -42,8 +42,19 @@ export async function executeEstimateProposal(
     logger.info('Stage 3: Effort Estimation');
     context.estimation = await estimateEffort(context.technicalAnalysis, context);
 
-    // Stage 4: Historical Validation
+    // Stage 4: Historical Validation (try Jira first, fallback to JSON)
     logger.info('Stage 4: Historical Validation');
+
+    // If no explicit source selected, try Jira first then fallback to JSON
+    if (!referenceSelection) {
+      logger.info('No data source specified. Attempting Jira (fedpat-jira), fallback to JSON local...');
+      referenceSelection = {
+        mode: 'automatic',
+        selectedReferences: [],
+        source: 'jira', // Try Jira first
+      };
+    }
+
     context.historicalComparison = await validateHistorical(
       context.technicalAnalysis,
       context.estimation,

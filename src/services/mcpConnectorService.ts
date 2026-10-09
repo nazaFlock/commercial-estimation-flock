@@ -17,9 +17,21 @@ class MCPConnectorService {
   }
 
   /**
-   * Inicializa conectores por defecto (local file)
+   * Inicializa conectores por defecto (Jira + local file)
    */
   private initializeDefaultConnectors(): void {
+    // Conector para Jira (via fedpat-jira MCP)
+    const jiraConnection: MCPConnection = {
+      id: 'jira',
+      type: 'jira',
+      name: 'Jira (fedpat-jira MCP)',
+      config: {
+        project: 'FLOCK', // Default project, can be overridden
+      },
+      status: 'available',
+      tools: ['jira_search', 'jira_get_issue', 'jira_get_worklog', 'jira_get_changelog'],
+    };
+
     // Conector para archivos JSON locales
     const localFileConnection: MCPConnection = {
       id: 'local-file',
@@ -32,10 +44,11 @@ class MCPConnectorService {
       tools: ['read', 'write', 'list'],
     };
 
+    this.connectors.set('jira', jiraConnection);
     this.connectors.set('local-file', localFileConnection);
     this.adapters.set('local-file', new JSONFileAdapter());
 
-    logger.info('MCPConnectorService: Conector local file inicializado');
+    logger.info('MCPConnectorService: Conectores inicializados - jira, local-file');
   }
 
   /**
