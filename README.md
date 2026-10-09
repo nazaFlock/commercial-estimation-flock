@@ -48,7 +48,7 @@ Soporte multi-MCP: pluggable data providers sin acoplamiento al core.
 
 - **HistoricalReferenceProvider**: Interfaz común para todos los proveedores
 - **JSONFileAdapter**: Referencia históricas desde archivos JSON locales (✅ producción)
-- **JiraAdapter**: Referencias históricas desde Jira via fedpat-jira MCP (⚠️ Agent SDK limitación)
+- **JiraAdapter**: Referencias históricas desde Jira via MCP (🔧 experimental - testing)
 - Framework listo para: CSVAdapter, ExcelAdapter, AzureAdapter
 
 #### 5. **Modelos & Tipos** (`src/types.ts`)

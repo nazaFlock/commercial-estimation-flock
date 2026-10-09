@@ -20,11 +20,11 @@ class MCPConnectorService {
    * Inicializa conectores por defecto (Jira + local file)
    */
   private initializeDefaultConnectors(): void {
-    // Conector para Jira (via fedpat-jira MCP)
+    // Conector para Jira (via MCP - experimental)
     const jiraConnection: MCPConnection = {
       id: 'jira',
       type: 'jira',
-      name: 'Jira (fedpat-jira MCP)',
+      name: 'Jira via MCP (experimental)',
       config: {
         project: 'FLOCK', // Default project, can be overridden
       },
@@ -120,13 +120,13 @@ class MCPConnectorService {
 
   /**
    * Registra un Jira MCP si está disponible
-   * (Llamado por CLI cuando se detecta fedpat-jira)
+   * (Llamado por CLI cuando se detecta Jira MCP)
    */
   registerJiraConnection(project: string, maxResults?: number): void {
     const jiraConnection: MCPConnection = {
-      id: 'fedpat-jira-prod',
+      id: 'jira-mcp',
       type: 'jira',
-      name: 'FedPat Jira',
+      name: 'Jira MCP',
       config: {
         project,
         maxResults: maxResults || 100,

@@ -164,37 +164,37 @@ ${sanitizeMarkdown(report.executiveSummary)}
 ### Confidence Justification
 ${sanitizeMarkdown(report.confidenceJustification)}
 
-## Effort Overview
+## Descripción General del Esfuerzo
 
-| Scenario | Hours | Work Days |
-|----------|-------|-----------|
-| **Minimum** | ${scenarios.minHours} h | ≈${scenarios.minDays} |
-| **Most Likely** | ${scenarios.likelyHours} h | ≈${scenarios.likelyDays} |
-| **Maximum** | ${scenarios.maxHours} h | ≈${scenarios.maxDays} |
+| Escenario | Horas | Días de Trabajo |
+|----------|-------|-----------------|
+| **Mínimo** | ${scenarios.minHours} h | ≈${scenarios.minDays} |
+| **Probable** | ${scenarios.likelyHours} h | ≈${scenarios.likelyDays} |
+| **Máximo** | ${scenarios.maxHours} h | ≈${scenarios.maxDays} |
 
-**Note:** Work days represent person-days (based on ${config.estimation.hoursPerDay} hours/day). Actual calendar duration depends on team size and availability.
+**Nota:** Los días de trabajo representan jornadas-persona (basado en ${config.estimation.hoursPerDay} horas/día). La duración real en días calendario depende del tamaño del equipo y disponibilidad.
 
-## Effort by Profile
+## Esfuerzo por Perfil
 
-| Profile | Min Hours | Likely Hours | Max Hours | Task Count |
-|---------|-----------|--------------|-----------|-----------|
+| Perfil | Horas Mín | Horas Probables | Horas Máx | Tareas |
+|--------|-----------|-----------------|-----------|--------|
 ${profilesTable}
 
-## Effort by Module
+## Esfuerzo por Módulo
 
-| Module | Min Hours | Likely Hours | Max Hours |
-|--------|-----------|--------------|-----------|
+| Módulo | Horas Mín | Horas Probables | Horas Máx |
+|--------|-----------|-----------------|-----------|
 ${modulesTable}
 
-## Functional Analysis
+## Análisis Funcional
 
-### Project Objective
+### Objetivo del Proyecto
 ${sanitizeMarkdown(report.functionalAnalysis.projectObjective)}
 
-### Scope
+### Alcance
 ${sanitizeMarkdown(report.functionalAnalysis.scope)}
 
-### Modules and Functionalities
+### Módulos y Funcionalidades
 ${report.functionalAnalysis.modules
   .map(
     (m) => `
@@ -207,50 +207,50 @@ ${report.functionalAnalysis.modules
   )
   .join('\n')}
 
-### Identified Gaps and Assumptions
-- **Confidence Level:** ${(report.functionalAnalysis.confidenceLevel * 100).toFixed(0)}%
-- **Gaps:** ${report.functionalAnalysis.gaps.length > 0 ? report.functionalAnalysis.gaps.map(g => sanitizeMarkdown(g)).join('; ') : 'None identified'}
-- **Assumptions:** ${report.functionalAnalysis.assumptions.length > 0 ? report.functionalAnalysis.assumptions.map(a => sanitizeMarkdown(a)).join('; ') : 'None'}
+### Brechas y Supuestos Identificados
+- **Nivel de Confianza:** ${(report.functionalAnalysis.confidenceLevel * 100).toFixed(0)}%
+- **Brechas:** ${report.functionalAnalysis.gaps.length > 0 ? report.functionalAnalysis.gaps.map(g => sanitizeMarkdown(g)).join('; ') : 'Ninguna identificada'}
+- **Supuestos:** ${report.functionalAnalysis.assumptions.length > 0 ? report.functionalAnalysis.assumptions.map(a => sanitizeMarkdown(a)).join('; ') : 'Ninguno'}
 
-## Technical Analysis
+## Análisis Técnico
 
-### Architecture
+### Arquitectura
 ${sanitizeMarkdown(report.technicalAnalysis.architecture)}
 
-### Technology Stack
+### Stack Tecnológico
 ${report.technicalAnalysis.technologyStack
-  .map((t) => `- **${sanitizeMarkdown(t.name)}** (${sanitizeMarkdown(t.category)}): ${sanitizeMarkdown(t.justification || 'No justification provided')}`)
+  .map((t) => `- **${sanitizeMarkdown(t.name)}** (${sanitizeMarkdown(t.category)}): ${sanitizeMarkdown(t.justification || 'Sin justificación')}`)
   .join('\n')}
 
-### Technical Components
+### Componentes Técnicos
 ${report.technicalAnalysis.components
   .map(
     (c) => `
 #### ${sanitizeMarkdown(c.name)}
-- **Type:** ${sanitizeMarkdown(c.type)}
-- **Complexity:** ${sanitizeMarkdown(c.complexity)}
-- **Description:** ${sanitizeMarkdown(c.description)}
-- **Rationale:** ${sanitizeMarkdown(c.rationale)}
-- **Tasks:** ${c.tasks.length}
+- **Tipo:** ${sanitizeMarkdown(c.type)}
+- **Complejidad:** ${sanitizeMarkdown(c.complexity)}
+- **Descripción:** ${sanitizeMarkdown(c.description)}
+- **Justificación:** ${sanitizeMarkdown(c.rationale)}
+- **Tareas:** ${c.tasks.length}
 `,
   )
   .join('\n')}
 
-### Identified Risks
+### Riesgos Identificados
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|-----------|--------|-----------|
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|--------|--------------|---------|------------|
 ${risksTable}
 
-## Estimation Breakdown
+## Desglose de Estimación
 
-### Estimation Criteria
+### Criterios de Estimación
 ${sanitizeMarkdown(report.estimation.criteria)}
 
-### Detailed Task Breakdown
+### Desglose Detallado de Tareas
 
-| # | Task Name | Module | Profile | Complexity | Min Hours | Likely | Max Hours | Justification |
-|----|-----------|--------|---------|------------|-----------|--------|-----------|---|
+| # | Nombre de Tarea | Módulo | Perfil | Complejidad | Horas Mín | Probables | Horas Máx | Justificación |
+|----|-----------------|--------|--------|-------------|-----------|-----------|-----------|---------------|
 ${report.estimation.tasks
   .map(
     (t, idx) =>
@@ -258,78 +258,78 @@ ${report.estimation.tasks
   )
   .join('\n')}
 
-### Tasks Requiring Validation
-${report.estimation.validationFlags.length > 0 ? report.estimation.validationFlags.map((f) => `- ${sanitizeMarkdown(f)}`).join('\n') : 'None identified'}
+### Tareas Que Requieren Validación
+${report.estimation.validationFlags.length > 0 ? report.estimation.validationFlags.map((f) => `- ${sanitizeMarkdown(f)}`).join('\n') : 'Ninguna identificada'}
 
-## Historical Comparison
+## Comparación Histórica
 
-**Similar Projects Found:** ${report.historicalComparison.similarProjects.length}
+**Proyectos Similares Encontrados:** ${report.historicalComparison.similarProjects.length}
 
 ${
   report.historicalComparison.similarProjects.length > 0
     ? `
-### Reference Projects
+### Proyectos de Referencia
 
-| Project ID | Type | Complexity | Est. Hours | Actual Hours | Status |
+| ID Proyecto | Tipo | Complejidad | Horas Est. | Horas Reales | Estado |
 |----------|------|------------|-----------|--------------|--------|
 ${report.historicalComparison.similarProjects
   .map(
     (p) =>
-      `| ${sanitizeMarkdown(p.projectId)} | ${sanitizeMarkdown(p.projectType)} | ${sanitizeMarkdown(p.complexity)} | ${p.estimatedHours} | ${p.actualHours ? p.actualHours.toFixed(0) : 'TBD'} | ${sanitizeMarkdown(p.status)} |`,
+      `| ${sanitizeMarkdown(p.projectId)} | ${sanitizeMarkdown(p.projectType)} | ${sanitizeMarkdown(p.complexity)} | ${p.estimatedHours} | ${p.actualHours ? p.actualHours.toFixed(0) : 'Por definir'} | ${sanitizeMarkdown(p.status)} |`,
   )
   .join('\n')}
 
-### Deviations from Historical Patterns
-${report.historicalComparison.deviations.length > 0 ? report.historicalComparison.deviations.map((d) => `- ${sanitizeMarkdown(d)}`).join('\n') : '- No significant deviations identified'}
+### Desviaciones de Patrones Históricos
+${report.historicalComparison.deviations.length > 0 ? report.historicalComparison.deviations.map((d) => `- ${sanitizeMarkdown(d)}`).join('\n') : '- No se identificaron desviaciones significativas'}
 
-### Recommendations
+### Recomendaciones
 ${report.historicalComparison.recommendations.length > 0 ? report.historicalComparison.recommendations.map((r) => `- ${sanitizeMarkdown(r)}`).join('\n') : '- Continue with current estimation'}
 `
-    : `**Note:** No historical references available.
+    : `**Nota:** No hay referencias históricas disponibles.
 
-**Why?** This estimation cannot be compared against similar projects because:
-- No historical project data exists matching these technologies and complexity
-- Or available historical data does not meet quality thresholds (insufficient tasks completed)
-- Or date range filters excluded available references
+**¿Por qué?** Esta estimación no puede compararse con proyectos similares porque:
+- No existen datos históricos de proyectos que coincidan con estas tecnologías y complejidad
+- O los datos históricos disponibles no cumplen los umbrales de calidad (tareas insuficientes completadas)
+- O los filtros de rango de fechas excluyeron las referencias disponibles
 
-**Recommendation:** Validate this estimation with technical stakeholders and document actual hours upon project completion to build historical reference base.`
+**Recomendación:** Valida esta estimación con los stakeholders técnicos y documenta las horas reales al completar el proyecto para construir una base de referencias históricas.`
 }
 
 ${statisticsSection}
 
-## Assumptions and Exclusions
+## Supuestos y Exclusiones
 
-### Key Assumptions
+### Supuestos Clave
 ${report.assumptions.map((a) => `- ${sanitizeMarkdown(a)}`).join('\n')}
 
-### Exclusions
+### Exclusiones
 ${report.exclusions.map((e) => `- ${sanitizeMarkdown(e)}`).join('\n')}
 
-## Pending Validation
+## Validación Pendiente
 
-${report.pendingValidation.length > 0 ? report.pendingValidation.map((p) => `- ${sanitizeMarkdown(p)}`).join('\n') : 'None identified'}
+${report.pendingValidation.length > 0 ? report.pendingValidation.map((p) => `- ${sanitizeMarkdown(p)}`).join('\n') : 'Ninguna identificada'}
 
-## Effort Distribution Charts
+## Gráficos de Distribución de Esfuerzo
 
-### By Profile
+### Por Perfil
 \`\`\`mermaid
-graph LR
-    A["Backend<br/>${report.estimation.profileEffort.find(p => p.profile === 'backend')?.likelyHours || 0}h"] -->|"${((report.estimation.profileEffort.find(p => p.profile === 'backend')?.likelyHours || 0) / report.estimation.scenariosHours.likelyHours * 100).toFixed(0)}%"| Total["Total<br/>${report.estimation.scenariosHours.likelyHours}h"]
-    B["Frontend<br/>${report.estimation.profileEffort.find(p => p.profile === 'frontend')?.likelyHours || 0}h"] -->|"${((report.estimation.profileEffort.find(p => p.profile === 'frontend')?.likelyHours || 0) / report.estimation.scenariosHours.likelyHours * 100).toFixed(0)}%"| Total
-    C["QA<br/>${report.estimation.profileEffort.find(p => p.profile === 'qa')?.likelyHours || 0}h"] -->|"${((report.estimation.profileEffort.find(p => p.profile === 'qa')?.likelyHours || 0) / report.estimation.scenariosHours.likelyHours * 100).toFixed(0)}%"| Total
-    D["DevOps<br/>${report.estimation.profileEffort.find(p => p.profile === 'devops')?.likelyHours || 0}h"] -->|"${((report.estimation.profileEffort.find(p => p.profile === 'devops')?.likelyHours || 0) / report.estimation.scenariosHours.likelyHours * 100).toFixed(0)}%"| Total
+pie title Distribución de Esfuerzo por Perfil
+    "Backend" : ${report.estimation.profileEffort.find(p => p.profile === 'backend')?.likelyHours || 0}
+    "Frontend" : ${report.estimation.profileEffort.find(p => p.profile === 'frontend')?.likelyHours || 0}
+    "QA" : ${report.estimation.profileEffort.find(p => p.profile === 'qa')?.likelyHours || 0}
+    "DevOps" : ${report.estimation.profileEffort.find(p => p.profile === 'devops')?.likelyHours || 0}
 \`\`\`
 
-### Scenario Range (Min - Likely - Max)
+### Rango de Escenarios (Mín - Probable - Máx)
 \`\`\`mermaid
 graph LR
-    A["Min<br/>${report.estimation.scenariosHours.minHours}h"] -->|"likelihood"| B["Likely<br/>${report.estimation.scenariosHours.likelyHours}h"]
-    B -->|"likelihood"| C["Max<br/>${report.estimation.scenariosHours.maxHours}h"]
+    A["Mín<br/>${report.estimation.scenariosHours.minHours}h"] -->|escenario| B["Probable<br/>${report.estimation.scenariosHours.likelyHours}h"]
+    B -->|escenario| C["Máx<br/>${report.estimation.scenariosHours.maxHours}h"]
 \`\`\`
 
 ---
 
-*This estimation is preliminary and should be validated with stakeholders before final commitment.*
+*Esta estimación es preliminar y debe validarse con los stakeholders antes de comprometerse finalmente.*
 `;
 
   return markdown;
@@ -342,45 +342,45 @@ function generateStatisticsSection(report: EstimationReport): string {
   // Sección 1: Calibración SP → Horas (si hay análisis estadístico)
   if (report.statisticalAnalysis) {
     const stat = report.statisticalAnalysis;
-    statisticsContent += '\n## Statistical Calibration\n\n';
-    statisticsContent += `**Data Source:** ${sanitizeMarkdown(stat.referenceSource)}\n`;
-    statisticsContent += `**Records Used:** ${stat.recordsUsed}\n\n`;
+    statisticsContent += '\n## Calibración Estadística\n\n';
+    statisticsContent += `**Fuente de Datos:** ${sanitizeMarkdown(stat.referenceSource)}\n`;
+    statisticsContent += `**Registros Utilizados:** ${stat.recordsUsed}\n\n`;
 
     if (stat.backendCalibration) {
       const bc = stat.backendCalibration;
-      statisticsContent += `### Backend Profile\n`;
-      statisticsContent += `- **Hours/Story Point:** ${bc.hoursPerSP.toFixed(2)} ± ${(bc.hoursPerSP * bc.coefficientOfVariation).toFixed(2)} h/SP\n`;
-      statisticsContent += `- **Coefficient of Variation:** ${(bc.coefficientOfVariation * 100).toFixed(1)}%\n`;
-      statisticsContent += `- **Model:** ${sanitizeMarkdown(bc.model === 'proportional' ? 'Proportional' : 'Linear Regression')}\n`;
-      statisticsContent += `- **Data Quality:** ${sanitizeMarkdown(bc.dataQuality.toUpperCase())}\n`;
-      statisticsContent += `- **Tasks Analyzed:** ${bc.taskCount}\n\n`;
+      statisticsContent += `### Perfil Backend\n`;
+      statisticsContent += `- **Horas/Story Point:** ${bc.hoursPerSP.toFixed(2)} ± ${(bc.hoursPerSP * bc.coefficientOfVariation).toFixed(2)} h/SP\n`;
+      statisticsContent += `- **Coeficiente de Variación:** ${(bc.coefficientOfVariation * 100).toFixed(1)}%\n`;
+      statisticsContent += `- **Modelo:** ${sanitizeMarkdown(bc.model === 'proportional' ? 'Proporcional' : 'Regresión Lineal')}\n`;
+      statisticsContent += `- **Calidad de Datos:** ${sanitizeMarkdown(bc.dataQuality.toUpperCase())}\n`;
+      statisticsContent += `- **Tareas Analizadas:** ${bc.taskCount}\n\n`;
     }
 
     if (stat.frontendCalibration) {
       const fc = stat.frontendCalibration;
-      statisticsContent += `### Frontend Profile\n`;
-      statisticsContent += `- **Hours/Story Point:** ${fc.hoursPerSP.toFixed(2)} ± ${(fc.hoursPerSP * fc.coefficientOfVariation).toFixed(2)} h/SP\n`;
-      statisticsContent += `- **Coefficient of Variation:** ${(fc.coefficientOfVariation * 100).toFixed(1)}%\n`;
-      statisticsContent += `- **Model:** ${sanitizeMarkdown(fc.model === 'proportional' ? 'Proportional' : 'Linear Regression')}\n`;
-      statisticsContent += `- **Data Quality:** ${sanitizeMarkdown(fc.dataQuality.toUpperCase())}\n`;
-      statisticsContent += `- **Tasks Analyzed:** ${fc.taskCount}\n\n`;
+      statisticsContent += `### Perfil Frontend\n`;
+      statisticsContent += `- **Horas/Story Point:** ${fc.hoursPerSP.toFixed(2)} ± ${(fc.hoursPerSP * fc.coefficientOfVariation).toFixed(2)} h/SP\n`;
+      statisticsContent += `- **Coeficiente de Variación:** ${(fc.coefficientOfVariation * 100).toFixed(1)}%\n`;
+      statisticsContent += `- **Modelo:** ${sanitizeMarkdown(fc.model === 'proportional' ? 'Proporcional' : 'Regresión Lineal')}\n`;
+      statisticsContent += `- **Calidad de Datos:** ${sanitizeMarkdown(fc.dataQuality.toUpperCase())}\n`;
+      statisticsContent += `- **Tareas Analizadas:** ${fc.taskCount}\n\n`;
     }
 
     if (stat.projectionSummary) {
       const proj = stat.projectionSummary;
-      statisticsContent += `### Projection Summary\n`;
-      statisticsContent += `| Profile | Story Points | Projected Hours |\n`;
-      statisticsContent += `|---------|---------|------|\n`;
+      statisticsContent += `### Resumen de Proyección\n`;
+      statisticsContent += `| Perfil | Story Points | Horas Proyectadas |\n`;
+      statisticsContent += `|--------|---------|------|\n`;
       statisticsContent += `| **Backend** | ${proj.totalStoryPointsBackend} | ${proj.hoursBackend.toFixed(0)} h |\n`;
       statisticsContent += `| **Frontend** | ${proj.totalStoryPointsFrontend} | ${proj.hoursFrontend.toFixed(0)} h |\n`;
       statisticsContent += `| **Total** | ${proj.totalStoryPointsBackend + proj.totalStoryPointsFrontend} | ${proj.totalHours.toFixed(0)} h |\n\n`;
 
-      statisticsContent += `**Scenario Range:** ${proj.scenarioLow.toFixed(0)}–${proj.scenarioCentral.toFixed(0)}–${proj.scenarioHigh.toFixed(0)} hours (Low–Central–High)\n`;
-      statisticsContent += `**Calibration Quality:** ${sanitizeMarkdown(proj.calibrationQuality.toUpperCase())}\n\n`;
+      statisticsContent += `**Rango de Escenarios:** ${proj.scenarioLow.toFixed(0)}–${proj.scenarioCentral.toFixed(0)}–${proj.scenarioHigh.toFixed(0)} horas (Bajo–Central–Alto)\n`;
+      statisticsContent += `**Calidad de Calibración:** ${sanitizeMarkdown(proj.calibrationQuality.toUpperCase())}\n\n`;
     }
 
     if (stat.warnings.length > 0) {
-      statisticsContent += `### Warnings\n`;
+      statisticsContent += `### Advertencias\n`;
       stat.warnings.forEach((w) => {
         statisticsContent += `- ${sanitizeMarkdown(w)}\n`;
       });
@@ -395,10 +395,10 @@ function generateStatisticsSection(report: EstimationReport): string {
 
     const actualHours = similar.filter((p) => p.actualHours !== undefined && p.actualHours !== null).map((p) => p.actualHours || 0);
 
-    statisticsContent = '\n## Statistical Analysis\n\n';
-    statisticsContent += '### Historical Data Summary\n\n';
-    statisticsContent += `- **Reference Projects:** ${similar.length}\n`;
-    statisticsContent += `- **With Actual Hours:** ${actualHours.length}\n`;
+    statisticsContent = '\n## Análisis Estadístico\n\n';
+    statisticsContent += '### Resumen de Datos Históricos\n\n';
+    statisticsContent += `- **Proyectos de Referencia:** ${similar.length}\n`;
+    statisticsContent += `- **Con Horas Reales:** ${actualHours.length}\n`;
 
     if (actualHours.length > 0) {
       const mean = actualHours.reduce((a, b) => a + b, 0) / actualHours.length;
@@ -407,22 +407,22 @@ function generateStatisticsSection(report: EstimationReport): string {
       const min = Math.min(...actualHours);
       const max = Math.max(...actualHours);
 
-      statisticsContent += `- **Average Actual Hours:** ${mean.toFixed(1)} h\n`;
-      statisticsContent += `- **Median Actual Hours:** ${median.toFixed(1)} h\n`;
-      statisticsContent += `- **Range:** ${min.toFixed(1)} – ${max.toFixed(1)} h\n`;
+      statisticsContent += `- **Promedio de Horas Reales:** ${mean.toFixed(1)} h\n`;
+      statisticsContent += `- **Mediana de Horas Reales:** ${median.toFixed(1)} h\n`;
+      statisticsContent += `- **Rango:** ${min.toFixed(1)} – ${max.toFixed(1)} h\n`;
 
       if (actualHours.length > 1) {
         const variance = actualHours.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / (actualHours.length - 1);
         const stdDev = Math.sqrt(variance);
         const cv = (stdDev / mean) * 100;
-        statisticsContent += `- **Std. Deviation:** ${stdDev.toFixed(1)} h (CV: ${cv.toFixed(1)}%)\n`;
+        statisticsContent += `- **Desviación Estándar:** ${stdDev.toFixed(1)} h (CV: ${cv.toFixed(1)}%)\n`;
       }
     }
 
-    statisticsContent += '\n### Technology Coverage\n\n';
+    statisticsContent += '\n### Cobertura Tecnológica\n\n';
     const allTechs = new Set<string>();
     similar.forEach((p) => p.technologies.forEach((t) => allTechs.add(t)));
-    statisticsContent += `- **Technologies:** ${Array.from(allTechs).join(', ')}\n`;
+    statisticsContent += `- **Tecnologías:** ${Array.from(allTechs).join(', ')}\n`;
   }
 
   return statisticsContent;

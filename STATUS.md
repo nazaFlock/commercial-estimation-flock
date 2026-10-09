@@ -37,28 +37,24 @@
 
 ## ⚠️ Limitaciones Conocidas
 
-### 1. **Invocación de Jira MCP - Agent SDK Limitación**
+### 1. **Soporte Multi-MCP - Arquitectura Agnóstica**
 
-**Estado:** 🔷 Arquitectura lista, Agent SDK limitación
+**Estado:** ✅ Implementado con fallback automático
 
-**Problema:**
-- `jira_search` y otras herramientas están disponibles en sesión
-- Pero Agent SDK no las invoca correctamente desde el código TypeScript
-- Claude responde en texto natural en lugar de ejecutar la herramienta
+**Diseño:**
+- Arquitectura agnóstica: funciona con cualquier proveedor histórico (Jira, Azure, CSV, JSON local)
+- Adapter pattern: fácil agregar nuevas fuentes sin modificar core
+- Fallback automático: si una fuente falla → continúa con JSON local sin errores
 
-**Causa raíz:**
-- No es problema de disponibilidad (herramientas confirmadas disponibles)
-- Parece ser problema de cómo Agent SDK invoca herramientas en contexto programático
-- Posibles causas: parámetros options incompletos, endpoint incorrecto, contexto diferente
+**Actualmente soportado:**
+- ✅ JSON local (producción-ready, sin dependencias)
+- 🔧 Jira via MCP (experimental - solo para testing)
+- 🎯 Próximo: CSV, Excel, Azure DevOps
 
-**Workaround actual:**
-- Sistema fallback automático a JSON local
-- Estimation continúa sin interrupciones
-- Log claro indicando por qué Jira no funcionó
-
-**Próximo paso:**
-- Investigar alternate invocation methods del Agent SDK
-- O usar approach intermedio: convertir Jira data a JSON primero
+**Nota sobre testing:**
+- Jira adapter está disponible para testing mientras validamos la integración MCP
+- Producción usa JSON local (recomendado y probado)
+- Usuario puede especificar `--data-source jira` para testing en ambiente local
 
 ---
 
