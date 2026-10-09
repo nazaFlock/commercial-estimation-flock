@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+id_rsa*
+id_ed25519*
+credentials*.json
+secrets*.json
+service-account*.json
+.npmrc
+.netrc
+
+# Claude Code / MCP (config local, tokens y credenciales)
+.claude/settings.local.json
+.mcp.json
+.fedpat-mcp/
+.jira-mcp/
+*.bak
+
+# Datos de clientes y estimaciones generadas (pueden contener info comercial)
+outputs/
+data/historical-estimates/*.json
+!data/historical-estimates/sample-*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+.temp/
+tmp/

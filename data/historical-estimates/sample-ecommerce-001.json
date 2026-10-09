@@ -1,0 +1,16 @@
+{
+  "id": "hist-001",
+  "projectId": "project-2023-ecommerce-small",
+  "projectType": "E-Commerce Platform",
+  "scope": "Small e-commerce platform with product catalog, shopping cart, and payment integration",
+  "technologies": ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
+  "functionalities": ["Product Catalog", "Shopping Cart", "Checkout", "Payment Processing", "Order Tracking"],
+  "complexity": "medium",
+  "estimatedHours": 1280,
+  "actualHours": 1456,
+  "responsibleProfile": "Backend Lead",
+  "date": "2023-06-15",
+  "status": "completed",
+  "notes": "Project took longer due to payment gateway integration complexity and performance optimization needs.",
+  "fictitious": true
+}
